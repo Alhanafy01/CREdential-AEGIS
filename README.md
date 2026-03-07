@@ -435,4 +435,4 @@ Built for the **Chainlink CRE Hackathon 2025**
 
 **Demo Video**: https://youtu.be/f33ThZqhzFE
 
-**Live Demo**: https://virtual.mainnet.eu.rpc.tenderly.co/e88e58fa-94d3-4567-adb3-c018006ef561
+**Tenderly logs**: https://virtual.mainnet.eu.rpc.tenderly.co/e88e58fa-94d3-4567-adb3-c018006ef561
