@@ -433,6 +433,6 @@ Built for the **Chainlink CRE Hackathon 2025**
 
 **Repository**: [CREdential-AEGIS](https://github.com/Alhanafy01/CREdential-AEGIS)
 
-**Demo Video**: [Link to video]
+**Demo Video**: https://youtu.be/f33ThZqhzFE
 
-**Live Demo**: [Link to Tenderly testnet]
+**Live Demo**: https://virtual.mainnet.eu.rpc.tenderly.co/e88e58fa-94d3-4567-adb3-c018006ef561
