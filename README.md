@@ -1,6 +1,9 @@
-# AEGIS Protocol
+# CREdential AEGIS
 
 **Agent Execution, Governance & Identity System**
+
+[![Author](https://img.shields.io/badge/Author-Mahmoud%20Alhanafy-purple)](https://github.com/Alhanafy01)
+[![GitHub](https://img.shields.io/badge/GitHub-CREdential--AEGIS-black)](https://github.com/Alhanafy01/CREdential-AEGIS)
 
 A decentralized marketplace for Trusted AI Agents built on Chainlink CRE (Chainlink Runtime Environment).
 
@@ -112,8 +115,8 @@ aegis-protocol/
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/aegis-protocol.git
-cd aegis-protocol
+git clone https://github.com/Alhanafy01/CREdential-AEGIS.git
+cd CREdential-AEGIS
 
 # Install contracts dependencies
 cd aegis-contracts && npm install
@@ -426,7 +429,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 Built for the **Chainlink CRE Hackathon 2025**
 
-**Team**: AEGIS Protocol
+**Author**: [Mahmoud Alhanafy](https://github.com/Alhanafy01)
+
+**Repository**: [CREdential-AEGIS](https://github.com/Alhanafy01/CREdential-AEGIS)
 
 **Demo Video**: [Link to video]
 
