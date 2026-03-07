@@ -1,0 +1,21 @@
+# ==========================================================================
+# CRE WORKFLOW SETTINGS FILE - AEGIS Agent Onboarding
+# ==========================================================================
+# This workflow handles World ID verification for agent registration.
+# Triggered by AgentRegistered events on TrustedAgentRegistry.
+
+# ==========================================================================
+local-simulation:
+  user-workflow:
+    workflow-owner-address: "0x1bc3e53dd66BC15a01F14f9e4E43aC9876EEEE7a"
+    workflow-name: "aegis-onboarding"
+  workflow-artifacts:
+    workflow-path: "./main.ts"
+    config-path: "./config.json"
+    secrets-path: "../secrets.yaml"
+
+# ==========================================================================
+production-testnet:
+  user-workflow:
+    workflow-owner-address: "0x1bc3e53dd66BC15a01F14f9e4E43aC9876EEEE7a"
+    workflow-name: "aegis-onboarding"

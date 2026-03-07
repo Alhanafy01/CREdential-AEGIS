@@ -1,0 +1,22 @@
+# ==========================================================================
+# CRE PROJECT SETTINGS FILE - AEGIS
+# ==========================================================================
+# Project-specific settings for CRE CLI targets.
+
+# ==========================================================================
+local-simulation:
+  rpcs:
+    - chain-name: ethereum-mainnet
+      url: https://virtual.mainnet.eu.rpc.tenderly.co/f277af26-9cfb-4ba8-943c-92c32507741e
+
+# ==========================================================================
+staging-settings:
+  rpcs:
+    - chain-name: ethereum-mainnet
+      url: https://virtual.mainnet.eu.rpc.tenderly.co/f277af26-9cfb-4ba8-943c-92c32507741e
+
+# ==========================================================================
+production-settings:
+  rpcs:
+    - chain-name: ethereum-mainnet
+      url: https://virtual.mainnet.eu.rpc.tenderly.co/f277af26-9cfb-4ba8-943c-92c32507741e

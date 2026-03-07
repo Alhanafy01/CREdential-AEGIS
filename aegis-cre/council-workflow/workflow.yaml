@@ -1,0 +1,48 @@
+# ==========================================================================
+# CRE WORKFLOW SETTINGS FILE - AEGIS Universal AI DeFi Executor
+# ==========================================================================
+# This workflow acts as an "Adversarial Dark Pool" and Universal DeFi Executor.
+# It orchestrates AI agent consensus and executes arbitrary DeFi operations
+# via the StrategyVaultV2 Universal Executor.
+#
+# CRE CAPABILITIES:
+#   - evmlog: Listen for StrategyJobCreated events on StrategyVaultV2
+#   - evm-read: Query TrustedAgentRegistryV2 for agent verification + reputation
+#   - evm-write: Execute strategies and send REWARD/SLASH feedback
+#   - confidential_http: Privacy-preserving AI queries (protects from MEV bots)
+#
+# WORKFLOW FLOW:
+#   1. TRIGGER: StrategyJobCreated(jobId, agentIds[]) on StrategyVaultV2
+#   2. VERIFY: Check all agents are verified + fetch reputations from Registry
+#   3. QUERY: confidential_http to OpenClaw AI with full context (cached)
+#   4. ENCODE: Build Universal Executor payload (targets[], values[], calldatas[])
+#   5. EXECUTE: Try writeReport to StrategyVaultV2
+#   6. FEEDBACK: Success → REWARD (100 AEGIS), Failure → SLASH (50 LINK, -10 rep)
+
+# ==========================================================================
+local-simulation:
+  user-workflow:
+    workflow-owner-address: "0x1bc3e53dd66BC15a01F14f9e4E43aC9876EEEE7a"
+    workflow-name: "aegis-universal-executor"
+  workflow-artifacts:
+    workflow-path: "./main.ts"
+    config-path: "./config.json"
+    secrets-path: "../secrets.yaml"
+  capabilities:
+    - evm-read
+    - evm-write
+    - confidential_http
+
+# ==========================================================================
+production-testnet:
+  user-workflow:
+    workflow-owner-address: "0x1bc3e53dd66BC15a01F14f9e4E43aC9876EEEE7a"
+    workflow-name: "aegis-universal-executor"
+  workflow-artifacts:
+    workflow-path: "./main.ts"
+    config-path: "./config.json"
+    secrets-path: "../secrets.yaml"
+  capabilities:
+    - evm-read
+    - evm-write
+    - confidential_http

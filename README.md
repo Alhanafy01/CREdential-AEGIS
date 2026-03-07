@@ -1,0 +1,433 @@
+# AEGIS Protocol
+
+**Agent Execution, Governance & Identity System**
+
+A decentralized marketplace for Trusted AI Agents built on Chainlink CRE (Chainlink Runtime Environment).
+
+![AEGIS Architecture](https://img.shields.io/badge/Chainlink-CRE-blue) ![Solidity](https://img.shields.io/badge/Solidity-0.8.24-green) ![License](https://img.shields.io/badge/License-MIT-yellow)
+
+---
+
+## 🎯 Problem Statement
+
+**How do you trust an AI agent with your money?**
+
+Current challenges in AI-powered DeFi:
+- **Sybil Attacks**: One person can run multiple malicious agents
+- **Single Point of Failure**: Trusting one AI is risky
+- **No Accountability**: AI agents have no skin in the game
+- **MEV Exploitation**: Trading intent gets front-run
+- **Compliance**: No institutional-grade policy enforcement
+
+---
+
+## 💡 Solution: AEGIS
+
+AEGIS creates a trustless system where:
+
+| Challenge | AEGIS Solution |
+|-----------|----------------|
+| Sybil Attacks | **World ID** verification (1 human = 1 agent) |
+| Single Point of Failure | **Multi-agent consensus** (3+ agents per job) |
+| No Accountability | **LINK staking** + automatic slashing |
+| MEV Exploitation | **Confidential HTTP** (CRE capability) |
+| Compliance | **ACE Policy Engine** (whitelist/blacklist) |
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         AEGIS PROTOCOL                               │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐          │
+│  │   World ID  │────▶│  Registry   │────▶│    CRE      │          │
+│  │ Verification│     │  (Staking)  │     │  Workflow   │          │
+│  └─────────────┘     └─────────────┘     └─────────────┘          │
+│                             │                    │                 │
+│                             ▼                    ▼                 │
+│                      ┌─────────────┐     ┌─────────────┐          │
+│                      │   Strategy  │◀────│  AI Agent   │          │
+│                      │    Vault    │     │  Consensus  │          │
+│                      └─────────────┘     └─────────────┘          │
+│                             │                    │                 │
+│                             ▼                    ▼                 │
+│                      ┌─────────────┐     ┌─────────────┐          │
+│                      │   DeFi      │     │   Reward/   │          │
+│                      │  Protocols  │     │   Slash     │          │
+│                      └─────────────┘     └─────────────┘          │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📦 Project Structure
+
+```
+aegis-protocol/
+├── aegis-contracts/       # Solidity smart contracts
+│   ├── contracts/
+│   │   ├── TrustedAgentRegistryV2.sol  # Agent registry with staking
+│   │   ├── StrategyVaultV2.sol         # Universal AI executor
+│   │   ├── FlightInsurance.sol         # Insurance demo
+│   │   └── ...
+│   └── scripts/           # Deployment & funding scripts
+│
+├── aegis-cre/             # Chainlink CRE Workflows
+│   ├── council-workflow/  # Multi-agent strategy execution
+│   ├── onboarding-workflow/ # World ID verification
+│   └── mock-agent-server/ # AI agent simulator
+│
+└── aegis-frontend/        # Next.js dashboard
+    └── src/
+        └── app/           # App router pages
+```
+
+---
+
+## 🔗 CRE Capabilities Used
+
+| Capability | Usage |
+|------------|-------|
+| `evmlog` | Trigger workflows on contract events |
+| `evm-read` | Read agent verification status |
+| `evm-write` | Execute strategies, rewards, slashes |
+| `confidential_http` | MEV-protected AI queries |
+| **CCIP** | Cross-chain identity broadcast |
+| **Data Feeds** | ETH/USD price for calculations |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- Tenderly account (for Virtual Testnet)
+
+### 1. Clone & Install
+
+```bash
+git clone https://github.com/YOUR_USERNAME/aegis-protocol.git
+cd aegis-protocol
+
+# Install contracts dependencies
+cd aegis-contracts && npm install
+
+# Install CRE dependencies
+cd ../aegis-cre/council-workflow && npm install
+cd ../onboarding-workflow && npm install
+cd ../mock-agent-server && npm install
+
+# Install frontend dependencies
+cd ../../aegis-frontend && npm install
+```
+
+### 2. Configure Environment
+
+```bash
+# Copy example env files
+cp aegis-contracts/.env.example aegis-contracts/.env
+cp aegis-cre/.env.example aegis-cre/.env
+
+# Edit with your Tenderly RPC URL and keys
+```
+
+### 3. Deploy Contracts
+
+```bash
+cd aegis-contracts
+npx hardhat run scripts/deploy-all.js --network tenderly
+```
+
+### 4. Run Frontend
+
+```bash
+cd aegis-frontend
+npm run dev
+# Open http://localhost:3000
+```
+
+---
+
+## 📋 Demo Scenarios
+
+### Scenario 1: Agent Registration & Verification
+
+1. User registers agent with World ID proof
+2. CRE workflow verifies identity
+3. Agent marked as verified + CCIP broadcast to Base
+
+### Scenario 2: Strategy Execution (Arbitrage)
+
+1. User creates strategy job
+2. CRE queries 3 AI agents (confidential HTTP)
+3. Agents reach consensus on strategy
+4. Universal Executor executes atomically
+5. Agreeing agents rewarded, dissenters slashed
+
+### Scenario 3: Insurance Claims
+
+1. User buys flight insurance policy
+2. Flight delayed → user submits claim
+3. AI agents verify claim validity
+4. Consensus reached → automatic payout
+
+---
+
+## 📜 Smart Contracts
+
+| Contract | Description |
+|----------|-------------|
+| `TrustedAgentRegistryV2` | Agent registration, LINK staking, reputation |
+| `StrategyVaultV2` | Universal AI DeFi Executor |
+| `FlightInsurance` | Insurance policy & claims |
+| `MockKeystoneForwarder` | CRE report delivery (testnet) |
+| `SimplePolicyEngine` | ACE compliance validation |
+
+---
+
+## 🛠️ CRE Workflows
+
+### Onboarding Workflow
+- **Trigger**: `AgentRegistered` event
+- **Action**: Verify World ID, broadcast via CCIP
+- **Output**: `AgentVerified` event
+
+### Council Workflow
+- **Trigger**: `StrategyJobCreated` event
+- **Action**: Query AI agents, build consensus, execute
+- **Output**: Strategy execution + reward/slash reports
+
+---
+
+## 🤖 AI Agent Integration Guide
+
+### Required Response Format
+
+AI agents must return a JSON response with `targets[]`, `values[]`, and `calldatas[]` for CRE to execute on-chain:
+
+```json
+{
+  "targets": [
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "0xe592427a0aece92de3edee1f18e0157c05861564"
+  ],
+  "values": [
+    "0",
+    "0"
+  ],
+  "calldatas": [
+    "0x095ea7b3000000000000000000000000e592427a0aece92de3edee1f18e0157c05861564000000000000000000000000000000000000000000000000000000001dcd6500",
+    "0x414bf389000000000000000000000000a0b86991c6218b36c1d19d4a2e9eb0ce3606eb48000000000000000000000000c02aaa39b223fe8d0a0e5c4f27ead9083c756cc200000000000000000000000000000000000000000000000000000000000001f4..."
+  ]
+}
+```
+
+### Field Specifications
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `targets` | `address[]` | Contract addresses to call (e.g., USDC, Uniswap Router) |
+| `values` | `uint256[]` | ETH values to send with each call (usually "0" for token ops) |
+| `calldatas` | `bytes[]` | ABI-encoded function calls |
+
+### Example: Uniswap V3 Swap Strategy
+
+```javascript
+// AI Agent generates this response for a USDC → WETH swap
+
+const response = {
+  // Step 1: Approve USDC, Step 2: Execute swap
+  targets: [
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", // USDC
+    "0xe592427a0aece92de3edee1f18e0157c05861564"  // Uniswap V3 SwapRouter
+  ],
+  values: ["0", "0"],
+  calldatas: [
+    // approve(spender, amount)
+    ethers.utils.defaultAbiCoder.encode(
+      ["bytes4", "address", "uint256"],
+      ["0x095ea7b3", SWAP_ROUTER, AMOUNT]
+    ),
+    // exactInputSingle((tokenIn, tokenOut, fee, recipient, deadline, amountIn, amountOutMin, sqrtPriceLimitX96))
+    SWAP_ROUTER_INTERFACE.encodeFunctionData("exactInputSingle", [swapParams])
+  ]
+};
+```
+
+### Example: Cross-DEX Arbitrage
+
+```javascript
+// AI Agent detects price difference between Uniswap V3 and SushiSwap
+
+const arbitrageResponse = {
+  targets: [
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", // USDC (approve Uniswap)
+    "0xe592427a0aece92de3edee1f18e0157c05861564", // Uniswap V3 (buy WETH)
+    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", // WETH (approve SushiSwap)
+    "0xd9e1ce17f2641f24ae83637ab66a2cca9c378b9f"  // SushiSwap (sell WETH)
+  ],
+  values: ["0", "0", "0", "0"],
+  calldatas: [
+    // 1. Approve USDC for Uniswap
+    "0x095ea7b3...",
+    // 2. Swap USDC → WETH on Uniswap V3 (cheaper)
+    "0x414bf389...",
+    // 3. Approve WETH for SushiSwap
+    "0x095ea7b3...",
+    // 4. Swap WETH → USDC on SushiSwap (more expensive)
+    "0x38ed1739..."
+  ]
+};
+```
+
+### Example: Insurance Claim Payout
+
+```javascript
+// AI Agent verifies flight delay and triggers payout
+
+const claimResponse = {
+  targets: [
+    "0x4E84d6394D95bE6d099e78DDD78F538149a02cdA"  // FlightInsurance contract
+  ],
+  values: ["0"],
+  calldatas: [
+    // processPayout(policyId)
+    INSURANCE_INTERFACE.encodeFunctionData("processPayout", [policyId])
+  ]
+};
+```
+
+### CRE Workflow Processing
+
+The CRE Council Workflow processes AI agent responses as follows:
+
+```typescript
+// 1. Query multiple agents via confidential_http
+const agent1Response = await confidentialHttp(agent1Url, jobData);
+const agent2Response = await confidentialHttp(agent2Url, jobData);
+const agent3Response = await confidentialHttp(agent3Url, jobData);
+
+// 2. Build consensus (majority agreement)
+const consensus = buildConsensus([agent1Response, agent2Response, agent3Response]);
+
+// 3. Encode for StrategyVaultV2
+const payload = encodeAbiParameters(
+  [
+    { name: 'reportType', type: 'uint8' },
+    { name: 'targets', type: 'address[]' },
+    { name: 'values', type: 'uint256[]' },
+    { name: 'calldatas', type: 'bytes[]' }
+  ],
+  [REPORT_TYPE.EXECUTE, consensus.targets, consensus.values, consensus.calldatas]
+);
+
+// 4. Deliver via evm-write to StrategyVaultV2
+await evmWrite(STRATEGY_VAULT_ADDRESS, payload);
+```
+
+### StrategyVaultV2 Execution
+
+The vault receives the payload and executes atomically:
+
+```solidity
+function _executeStrategy(
+    address[] memory targets,
+    uint256[] memory values,
+    bytes[] memory calldatas
+) internal {
+    for (uint256 i = 0; i < targets.length; i++) {
+        (bool success, ) = targets[i].call{value: values[i]}(calldatas[i]);
+        require(success, "Strategy execution failed");
+    }
+    emit StrategyExecuted(currentJobId, targets, true);
+}
+```
+
+### Supported DeFi Protocols
+
+| Protocol | Address | Common Functions |
+|----------|---------|------------------|
+| **USDC** | `0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48` | `approve`, `transfer` |
+| **WETH** | `0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2` | `approve`, `deposit`, `withdraw` |
+| **Uniswap V3 Router** | `0xe592427a0aece92de3edee1f18e0157c05861564` | `exactInputSingle`, `exactInput` |
+| **SushiSwap Router** | `0xd9e1ce17f2641f24ae83637ab66a2cca9c378b9f` | `swapExactTokensForTokens` |
+| **Aave V3 Pool** | `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2` | `supply`, `borrow`, `repay` |
+
+### Error Handling
+
+AI agents should return error responses when unable to generate a valid strategy:
+
+```json
+{
+  "error": true,
+  "reason": "Insufficient liquidity for requested swap size",
+  "targets": [],
+  "values": [],
+  "calldatas": []
+}
+```
+
+---
+
+## 🔐 Security Features
+
+- **World ID**: Sybil-resistant identity verification
+- **LINK Staking**: Economic security (agents have skin in the game)
+- **Multi-Agent Consensus**: No single point of failure
+- **Automatic Slashing**: Malicious agents lose stake
+- **ACE Policy Engine**: Whitelist/blacklist enforcement
+- **Confidential HTTP**: MEV protection for trading intent
+
+---
+
+## 📊 Report Types
+
+| Type | Value | Purpose |
+|------|-------|---------|
+| VERIFY | 1 | World ID verification |
+| REPUTATION | 2 | Reputation delta update |
+| SLASH | 3 | Stake slashing |
+| REWARD | 4 | AEGIS token distribution |
+
+---
+
+## 🧪 Testing
+
+```bash
+cd aegis-contracts
+npx hardhat test
+```
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- [Chainlink CRE](https://chain.link/) - Runtime Environment
+- [World ID](https://worldcoin.org/) - Identity verification
+- [Tenderly](https://tenderly.co/) - Virtual Testnet infrastructure
+- [Uniswap](https://uniswap.org/) - DEX integration
+- [SushiSwap](https://sushi.com/) - DEX integration
+
+---
+
+## 🏆 Hackathon Submission
+
+Built for the **Chainlink CRE Hackathon 2025**
+
+**Team**: AEGIS Protocol
+
+**Demo Video**: [Link to video]
+
+**Live Demo**: [Link to Tenderly testnet]

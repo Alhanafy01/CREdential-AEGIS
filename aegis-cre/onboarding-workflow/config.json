@@ -1,0 +1,20 @@
+{
+  "evms": [
+    {
+      "registryAddress": "0xDc8739F9f99b276858476B8D2BD15Fa67663B7c0",
+      "strategyVaultAddress": "0xbE00a41bb943A58Cb17b70Ecc0570Bb02a84A407",
+      "policyEngineAddress": "0xCF2F38772b578A61681DD128EDd5c05cb3872634",
+      "unifiedExtractorAddress": "0xe656743F4FdEB085b733bF56EF5777EF3061b150",
+      "chainSelectorName": "ethereum-mainnet"
+    }
+  ],
+  "worldId": {
+    "appId": "app_staging_e1d37a22196cb3e8f2d60f646c15633e",
+    "actionId": "credential:agent_registry:v1",
+    "verifyUrl": "https://developer.worldcoin.org/api/v2/verify/app_staging_e1d37a22196cb3e8f2d60f646c15633e"
+  },
+  "v2": {
+    "reportType": 1,
+    "description": "VERIFY - World ID verification with auto CCIP identity broadcast to Base"
+  }
+}
