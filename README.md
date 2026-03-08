@@ -11,30 +11,30 @@ A decentralized marketplace for Trusted AI Agents built on Chainlink CRE (Chainl
 
 ---
 
-## 🎯 Problem Statement
-
+### 🎯 Problem Statement
 **How do you trust an AI agent with your money?**
 
 Current challenges in AI-powered DeFi:
-- **Sybil Attacks**: One person can run multiple malicious agents
-- **Single Point of Failure**: Trusting one AI is risky
-- **No Accountability**: AI agents have no skin in the game
-- **MEV Exploitation**: Trading intent gets front-run
-- **Compliance**: No institutional-grade policy enforcement
+*   **Sybil Attacks:** One malicious actor can spin up thousands of fake, unaccountable bot agents.
+*   **Single Point of Failure:** Trusting a single AI model's judgment is highly risky and prone to hallucinations.
+*   **No Accountability:** AI agents have no "skin in the game" if they make a disastrous trade.
+*   **MEV Exploitation:** Public AI trading intent gets instantly front-run by MEV bots.
+*   **Compliance:** No institutional-grade policy enforcement to stop hacks or interactions with sanctioned wallets.
+*   **Hardcoded Limitations:** Traditional smart contracts are rigid and require hardcoded logic for every specific action, preventing true AI autonomy.
 
----
-
-## 💡 Solution: AEGIS
-
-AEGIS creates a trustless system where:
+### 💡 Solution: AEGIS (Powered by CRE)
+AEGIS creates a trustless, institutional-grade execution layer where every step of the agent lifecycle is strictly orchestrated by the **Chainlink Runtime Environment (CRE)**:
 
 | Challenge | AEGIS Solution |
-|-----------|----------------|
-| Sybil Attacks | **World ID** verification (1 human = 1 agent) |
-| Single Point of Failure | **Multi-agent consensus** (3+ agents per job) |
-| No Accountability | **LINK staking** + automatic slashing |
-| MEV Exploitation | **Confidential HTTP** (CRE capability) |
-| Compliance | **ACE Policy Engine** (whitelist/blacklist) |
+| :--- | :--- |
+| **Sybil Attacks** | **World ID "Orb" Verification:** The **CRE `onboarding-workflow`** securely queries the World ID Cloud API off-chain to guarantee every AI agent is registered by a strict, biometric **Orb-verified** human. (One verified human can operate multiple agents, but no agent can exist without human accountability). |
+| **Single Point of Failure** | **Multi-Agent Consensus:** The **CRE `council-workflow`** queries 3+ independent agents and runs a deterministic TypeScript callback algorithm to compare responses and enforce a strict majority agreement. |
+| **No Accountability** | **LINK Staking & Slashing:** Through **CRE's `evm-write` capability**, AEGIS automatically enforces economic security by rewarding agreeing agents and instantly slashing the staked LINK of any agent that dissents or hallucinates. |
+| **MEV Exploitation** | **Confidential Compute:** By utilizing **CRE's `confidential_http` capability**, the AI's complex routing logic is queried inside a secure Trusted Execution Environment (TEE). This creates a "Dark Pool" that prevents information leakage to MEV bots. |
+| **Compliance** | **Chainlink ACE Firewall:** Before **CRE** executes the final payload, the data is routed through the Automated Compliance Engine (ACE) to physically block unwhitelisted targets and enforce volume limits. |
+| **Hardcoded Limitations** | **Protocol-Agnostic Executor:** **CRE** seamlessly delivers the AI-generated raw execution arrays (`targets[]`, `values[]`, `calldatas[]`) to a Universal Vault, allowing the AI to interact with *any* external DeFi protocol trustlessly. |
+
+***
 
 ---
 
