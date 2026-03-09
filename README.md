@@ -352,7 +352,7 @@ function _executeStrategy(
 }
 ```
 
-### Supported DeFi Protocols
+### Protocols Used in Demo
 
 | Protocol | Address | Common Functions |
 |----------|---------|------------------|
@@ -360,7 +360,12 @@ function _executeStrategy(
 | **WETH** | `0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2` | `approve`, `deposit`, `withdraw` |
 | **Uniswap V3 Router** | `0xe592427a0aece92de3edee1f18e0157c05861564` | `exactInputSingle`, `exactInput` |
 | **SushiSwap Router** | `0xd9e1ce17f2641f24ae83637ab66a2cca9c378b9f` | `swapExactTokensForTokens` |
-| **Aave V3 Pool** | `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2` | `supply`, `borrow`, `repay` |
+| ** FlightInsurance Contract | '0x4E84d6394D95bE6d099e78DDD78F538149a02cdA' | 'FlightInsurance.processPayout(policyId)'|
+
+Our AI Council dynamically generated calldata for the following protocols during our Tenderly Virtual Testnet simulation:
+Uniswap (Arbitrage Routing)
+SushiSwap (Arbitrage Routing)
+Decentralized Flight Insurance (Cross-industry execution)
 
 ### Error Handling
 
@@ -436,3 +441,48 @@ Built for the **Chainlink CRE Hackathon 2025**
 **Demo Video**: https://youtu.be/f33ThZqhzFE
 
 **Tenderly logs**: https://virtual.mainnet.eu.rpc.tenderly.co/e88e58fa-94d3-4567-adb3-c018006ef561
+** All Contract Addresses (Tenderly Virtual Mainnet)
+
+  Core AEGIS Contracts
+
+  | Contract               | Address                                    |
+  |------------------------|--------------------------------------------|
+  | TrustedAgentRegistryV2 | 0xDc8739F9f99b276858476B8D2BD15Fa67663B7c0 |
+  | StrategyVaultV2        | 0xbE00a41bb943A58Cb17b70Ecc0570Bb02a84A407 |
+  | FlightInsurance        | 0x4E84d6394D95bE6d099e78DDD78F538149a02cdA |
+  | MockKeystoneForwarder  | 0xa3d1ad4ac559a6575a114998affb2fb2ec97a7d9 |
+  | SimplePolicyEngine     | 0xCF2F38772b578A61681DD128EDd5c05cb3872634 |
+  | UnifiedExtractor       | 0xe656743F4FdEB085b733bF56EF5777EF3061b150 |
+
+  Tokens
+
+  | Token       | Address                                    |
+  |-------------|--------------------------------------------|
+  | AEGIS Token | 0xBbbf2Db05746734b2Bad7F402b97c6A00d9d38EC |
+  | LINK        | 0x514910771AF9Ca656af840dff83E8264EcF986CA |
+  | USDC        | 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48 |
+  | WETH        | 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 |
+
+  DeFi Protocols
+
+  | Protocol                    | Address
+   |
+  |-----------------------------|-------------------------------------------
+  -|
+  | Uniswap V3 SwapRouter       | 0xE592427A0AEce92De3Edee1F18E0157C05861564
+   |
+  | SushiSwap Router            | 0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F
+   |
+  | Uniswap V3 Pool (USDC/WETH) | 0x88e6A0c2dDD26FEEb64F039a2c41296FcB3f5640
+   |
+     | SushiSwap Pair (USDC/WETH)  | 0x397ff1542f962076d0bfe58ea045ffa2d347aca0
+
+
+  Other
+
+  | Name                   | Address                                    |
+  |------------------------|--------------------------------------------|
+  | Treasury               | 0x1bc3e53dd66BC15a01F14f9e4E43aC9876EEEE7a |
+  | Chainlink ETH/USD Feed | 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419 |
+
+
